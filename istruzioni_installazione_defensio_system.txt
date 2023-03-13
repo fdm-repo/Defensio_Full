@@ -1,0 +1,144 @@
+1) creare cartella defensio su /home/user/
+2) Installare GIT da apt (sudo apt get install git)
+3) eseguire   git clone https://github.com/n3tSh4d3/defensio.git   per scaricare dal repository github defensio
+4) spostarsi dentro la cartella defensio
+5) eseguire sudo ./installazione_DB_Apache_PHP.sh (se occore dare diritti di esecuzione  sudo chmod 777 installazione_DB_Apache_PHP.sh)
+6) eseguire sudo mysql_secure_installation
+
+impostare i seguenti valori nella configurazione guidata:
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user. If you've just installed MariaDB, and
+haven't set the root password yet, you should just press enter here.
+
+Enter current password for root (enter for none): << Just Press Enter  (inizialmente la password è nulla, quindi premere ENTER)
+OK, successfully used password, moving on...
+Setting the root password or using the unix_socket ensures that nobody
+can log into the MariaDB root user without the proper authorisation.
+You already have your root account protected, so you can safely answer 'n'.
+Switch to unix_socket authentication [Y/n] N  << Disable Unix Socket Authentication (disabilita l'accesso Socket)
+ ... skipping.
+You already have your root account protected, so you can safely answer 'n'.
+
+Change the root password? [Y/n] Y << Set MariaDB root password (cambia la password da root del DB)
+New password: xxx << Enter new MariaDB root password (Inserisci la password la prima volta)
+Re-enter new password: xxx << Re-enter new MariaDB root password (re-inserisci la password)
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+Remove anonymous users? [Y/n] Y << Remove Anonymous Users (rimuovi l'acceso anonimo al DB)
+ ... Success!
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+Disallow root login remotely? [Y/n] n << Disallow root login remotely  (inserisci no per consentire l'acceso da rete al DB * anche localhost *)
+ ... Success!
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+Remove test database and access to it? [Y/n] Y << Remove test database (rimuovi il DB di test che crea mysql in fase di installazione)
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+Reload privilege tables now? [Y/n] Y << Reload privilege tables (ricarica le impostazioni)
+ ... Success!
+Cleaning up...
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+Thanks for using MariaDB!
+
+*** verificare se mysql è "running" con il comando : sudo systemctl status mysqld
+
+
+7) installazione phpmyadmin : esegui ./Installazione_PHPmyAdmin.sh (se occore dare diritti di esecuzione  sudo chmod 777 Installazione_PHPmyAdmin.sh)
+
+    alla richiesta : Configure database for phpmyadmin with dbconfig-common?    selezionare yes
+
+8) accedi a phpmyadmin con root e la password inserita nella fase 6  (accedi da http://localhost/phpmyadmin)
+9) crea un database chiamato defensio
+10)clicca sul database defensio e dalla barra superiore orizzontale clicca su importa, poi sfoglia e seleziona il file defensio.sql (nella cartella defensio scaricata con git)
+11) una volta importata la struttura del database, inserisci un record nella tabella engines relativa al nuovo sensore che si vuole abilitare (importante il valore codeword che identifica l'engine)
+12)tornando sulla shell di defensio eseguire sudo ./Installation.sh (installa tutte le dipendenze, arachni, portainer e openvas)
+13)eseguire ./C2.py (da root) e inserire l'user root, password (quella inserita al punto 6), indirizzo ip (127.0.0.1), porta 3306, database defensio, e id asset (il codeword inserito nella tabella engines)
+13a) nel caso procedura ./C2.py fallisca, riavviarla con ./inizializzazione_engine.py - utlizzare Y maiuscola
+
+14) installare suricata e modificare il file /etc/suricata/suricata.yaml  cambiando la denominazione dei file json
+
+  - eve-log:
+      enabled: yes
+      filetype: regular #regular|syslog|unix_dgram|unix_stream|redis
+      filename: eve-%Y-%m-%d-%H:%M.json
+      rotate-interval: minute
+
+15)  aprire una nuova finestra terminale (non tab) spostarsi nella cartella defensio ed eseguire ./Sentinel.py
+16) scaricare il FE e decomprimerlo
+17) aprire una nuova finestra terminale spostarsi nella cartella del FE /assets/php ed editare il file sudo nano connect_DB.php. Per una installazione locale impostare:
+- servername 127.0.0.1
+editare i campi username e password inserendo le password di accesso a phpmyadmin, controllare che il nome del database sia defenso. Salvare ed uscire ctrl+x e poi invio
+18) spostarsi nuovamente nella cartella root del FE e copiare il contenuto della cartella fe nella directory apache con sudo cp -R * /var/www/html
+
+***steps da effettuare solo se presente IDS***
+
+19.1) installare dipendenze suricata
+sudo apt install -y build-essential libpcap-dev   \
+                libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \
+                libcap-ng-dev libcap-ng0 make libmagic-dev         \
+                libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \
+                python3-yaml rustc cargo libpcre2-dev
+
+19.2) aggiungere repo suricata ed installarlo
+sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:oisf/suricata-stable (premere invio per continuare)
+sudo apt update
+sudo apt install -y suricata
+
+19.3) configurare rules
+sudo suricata-update
+sudo suricata-update update-sources
+sudo suricata-update list-sources
+sudo suricata-update enable-source stamus/lateral
+sudo suricata-update
+sudo suricata-update enable-source malsilo/win-malware
+sudo suricata-update
+sudo suricata-update enable-source tgreen/hunting
+sudo suricata-update
+sudo suricata-update enable-source etnetera/aggressive
+sudo suricata-update
+sudo suricata-update enable-source sslbl/ja3-fingerprints
+sudo suricata-update
+sudo suricata-update enable-source sslbl/ssl-fp-blacklist
+sudo suricata-update
+
+19.4) installare net-tools ed abilitare modalita promiscusa sulla scheda di rete dedicata al monitoring
+sudo apt install net-tools -y
+ip a
+per verificare mac address schede di rete e confrontarlo con la scehda di rete impostata per il mirroring in esxi (cliccare sulla VM ed esplodere il network adapter dedicato al mirroring)
+sudo ifconfig nomeschedarete promisc
+19.5)modificare il file configurazione suricata
+sudo nano /etc/suricata/suricata.yaml
+sostituendo i valori esistenti con
+(se uilizza nano premere ctrl+W per avviare la ricerca valore)
+  - eve-log:
+      enabled: yes
+      filetype: regular #regular|syslog|unix_dgram|unix_stream|redis
+      filename: eve-%Y-%m-%d-%H:%M.json
+      rotate-interval: minute
+sosituire nome scheda ethernet predefinito avviando nuovamente la ricerca all'interno del file per il valore eth0 e rimuovere commento dalla riga #threads
+
+af-packet:
+  - interface: ens192
+    # Number of receive threads. "auto" uses the number of cores
+       threads: auto
+
+salvare ed uscire e riavviare suricata con
+sudo systemctl restart suricata
+

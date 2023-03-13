@@ -1,0 +1,1182 @@
+<?xml version="1.0"?>
+<report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Arachni/arachni/v1.6.1.1/components/reporters/xml/schema.xsd">
+  <version>1.6.1.1</version>
+  <seed>3936546e9a563de507f9e34ac09efbbd</seed>
+  <options>---
+input:
+  values: {}
+  default_values:
+    name: arachni_name
+    user: arachni_user
+    usr: arachni_user
+    pass: 5543!%arachni_secret
+    txt: arachni_text
+    num: '132'
+    amount: '100'
+    mail: arachni@email.gr
+    account: '12'
+    id: '1'
+  without_defaults: false
+  force: false
+http:
+  user_agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1
+  request_timeout: 20000
+  request_redirect_limit: 5
+  request_concurrency: 10
+  request_queue_size: 50
+  request_headers: {}
+  response_max_size: 500000
+  cookies: {}
+  authentication_type: auto
+session: {}
+audit:
+  parameter_values: true
+  exclude_vector_patterns: []
+  include_vector_patterns: []
+  link_templates: []
+  links: true
+  forms: true
+  cookies: true
+  ui_inputs: true
+  ui_forms: true
+  jsons: true
+  xmls: true
+  nested_cookies: true
+browser_cluster:
+  local_storage: {}
+  session_storage: {}
+  wait_for_elements: {}
+  wait_for_timers: false
+  pool_size: 4
+  job_timeout: 60
+  worker_time_to_live: 250
+  ignore_images: false
+  screen_width: 1600
+  screen_height: 1200
+scope:
+  directory_depth_limit: 10
+  auto_redundant_paths: 15
+  redundant_path_patterns: {}
+  dom_depth_limit: 4
+  exclude_file_extensions:
+  - gif
+  - bmp
+  - tif
+  - tiff
+  - jpg
+  - jpeg
+  - jpe
+  - pjpeg
+  - png
+  - ico
+  - psd
+  - xcf
+  - 3dm
+  - max
+  - svg
+  - eps
+  - drw
+  - ai
+  - asf
+  - rm
+  - mpg
+  - mpeg
+  - mpe
+  - 3gp
+  - 3g2
+  - avi
+  - flv
+  - mov
+  - mp4
+  - swf
+  - vob
+  - wmv
+  - aif
+  - mp3
+  - mpa
+  - ra
+  - wav
+  - wma
+  - mid
+  - m4a
+  - ogg
+  - flac
+  - zip
+  - zipx
+  - tar
+  - gz
+  - 7z
+  - rar
+  - bz2
+  - bin
+  - cue
+  - dmg
+  - iso
+  - mdf
+  - vcd
+  - raw
+  - exe
+  - apk
+  - app
+  - jar
+  - pkg
+  - deb
+  - rpm
+  - msi
+  - ttf
+  - otf
+  - woff
+  - woff2
+  - fon
+  - fnt
+  - css
+  - js
+  - pdf
+  - docx
+  - xlsx
+  - pptx
+  - odt
+  - odp
+  exclude_path_patterns: []
+  exclude_content_patterns: []
+  include_path_patterns: []
+  restrict_paths: []
+  extend_paths: []
+  url_rewrites: {}
+  include_subdomains: true
+datastore:
+  report_path: 205/Arachni_https.afr
+checks:
+- xst
+- localstart_asp
+- http_put
+- insecure_client_access_policy
+- directory_listing
+- origin_spoof_access_restriction_bypass
+- common_files
+- http_only_cookies
+- html_objects
+- hsts
+- password_autocomplete
+- x_frame_options
+- form_upload
+- unencrypted_password_forms
+- cookie_set_for_parent_domain
+- mixed_resource
+- private_ip
+- ssn
+- captcha
+- cvs_svn_users
+- credit_card
+- emails
+- insecure_cors_policy
+- insecure_cookies
+- common_directories
+- backup_files
+- backup_directories
+- htaccess_limit
+- webdav
+- interesting_responses
+- insecure_cross_domain_policy_access
+- allowed_methods
+- insecure_cross_domain_policy_headers
+- backdoors
+- common_admin_interfaces
+- xss_event
+- no_sql_injection
+- xss_tag
+- ldap_injection
+- response_splitting
+- code_injection
+- unvalidated_redirect_dom
+- os_cmd_injection_timing
+- os_cmd_injection
+- session_fixation
+- source_code_disclosure
+- sql_injection_differential
+- trainer
+- xss_path
+- no_sql_injection_differential
+- sql_injection_timing
+- xss_script_context
+- xss_dom
+- xxe
+- xss
+- code_injection_php_input_wrapper
+- code_injection_timing
+- unvalidated_redirect
+- rfi
+- xss_dom_script_context
+- path_traversal
+- file_inclusion
+- xpath_injection
+- sql_injection
+- csrf
+platforms: []
+plugins: {}
+no_fingerprinting: false
+authorized_by: 
+url: https://185.182.56.86/
+</options>
+  <start_datetime>2023-03-13T15:35:51+01:00</start_datetime>
+  <finish_datetime>2023-03-13T15:35:58+01:00</finish_datetime>
+  <sitemap>
+    <entry url="https://185.182.56.86/" code="200"/>
+  </sitemap>
+  <issues>
+    <issue>
+      <name>Common directory</name>
+      <description>
+Web applications are often made up of multiple files and directories.
+
+It is possible that over time some directories may become unreferenced (unused)
+by the web application and forgotten about by the administrator/developer.
+Because web applications are built using common frameworks, they contain common
+directories that can be discovered (independent of server).
+
+During the initial recon stages of an attack, cyber-criminals will attempt to
+locate unreferenced directories in the hope that the directory will assist in further
+compromise of the web application.
+To achieve this they will make thousands of requests using word lists containing
+common names.
+The response headers from the server will then indicate if the directory exists.
+
+Arachni also contains a list of common directory names which it will attempt to access.
+</description>
+      <remedy_guidance>
+If directories are unreferenced then they should be removed from the web root
+and/or the application directory.
+
+Preventing access without authentication may also be an option and can stop a
+client from being able to view the contents of a file, however it is still likely
+that the directory structure will be able to be discovered.
+
+Using obscure directory names is implementing security through obscurity and is
+not a recommended option.
+</remedy_guidance>
+      <remedy_code/>
+      <severity>medium</severity>
+      <check>
+        <name>Common directories</name>
+        <description>Tries to find common directories on the server.</description>
+        <author>Tasos "Zapotek" Laskos &lt;tasos.laskos@arachni-scanner.com&gt; </author>
+        <version>0.2.3</version>
+        <shortname>common_directories</shortname>
+      </check>
+      <cwe>538</cwe>
+      <digest>3270030721</digest>
+      <references>
+        <reference title="CWE" url="http://cwe.mitre.org/data/definitions/538.html"/>
+        <reference title="OWASP" url="https://www.owasp.org/index.php/Forced_browsing"/>
+      </references>
+      <vector>
+        <class>Arachni::Element::Server</class>
+        <type>server</type>
+        <url>https://185.182.56.86/webmail/</url>
+        <action>https://185.182.56.86/webmail/</action>
+      </vector>
+      <remarks/>
+      <page>
+        <body>&lt;!DOCTYPE html&gt;
+
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;Roundcube Webmail :: Welcome to Roundcube Webmail&lt;/title&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0"&gt;&lt;meta name="theme-color" content="#f4f4f4"&gt;&lt;meta name="msapplication-navbutton-color" content="#f4f4f4"&gt;
+	&lt;link rel="shortcut icon" href="skins/elastic/images/favicon.ico?s=1674504194"&gt;
+	&lt;link rel="stylesheet" href="skins/elastic/deps/bootstrap.min.css?s=1674504210"&gt;
+	
+		&lt;link rel="stylesheet" href="skins/elastic/styles/styles.min.css?s=1674504194"&gt;
+		
+	
+	
+		&lt;script&gt;
+		try {
+			if (document.cookie.indexOf('colorMode=dark') &gt; -1
+				|| (document.cookie.indexOf('colorMode=light') === -1 &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.className += ' dark-mode';
+			}
+		} catch (e) { }
+		&lt;/script&gt;
+	
+&lt;link rel="stylesheet" type="text/css" href="plugins/jqueryui/themes/elastic/jquery-ui.min.css?s=1674504193"&gt;&lt;script src="program/js/jquery.min.js?s=1674504197"&gt;&lt;/script&gt;&lt;script src="program/js/common.min.js?s=1674504194"&gt;&lt;/script&gt;&lt;script src="program/js/app.min.js?s=1674504194"&gt;&lt;/script&gt;&lt;script src="program/js/jstz.min.js?s=1674504197"&gt;&lt;/script&gt;&lt;script&gt;
+/*
+        @licstart  The following is the entire license notice for the 
+        JavaScript code in this page.
+
+        Copyright (C) The Roundcube Dev Team
+
+        The JavaScript code in this page is free software: you can redistribute
+        it and/or modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation, either version 3 of
+        the License, or (at your option) any later version.
+
+        The code is distributed WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU GPL for more details.
+
+        @licend  The above is the entire license notice
+        for the JavaScript code in this page.
+*/
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","standard_windows":false,"locale":"en_US","devel_mode":null,"rcversion":10601,"cookie_domain":"","cookie_path":"/","cookie_secure":true,"dark_mode_support":true,"skin":"elastic","blankpage":"skins/elastic/watermark.html","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":"/webmail/?_task=login","compose_extwin":false,"date_format":"yy-mm-dd","date_format_localized":"YYYY-MM-DD","request_token":"wnZ14AZrdEqQ7umc67X4uXRZJWY395b7"});
+rcmail.add_label({"loading":"Loading...","servererror":"Server Error!","connerror":"Connection Error (Failed to reach the server)!","requesttimedout":"Request timed out","refreshing":"Refreshing...","windowopenerror":"The popup window was blocked!","uploadingmany":"Uploading files...","uploading":"Uploading file...","close":"Close","save":"Save","cancel":"Cancel","alerttitle":"Attention","confirmationtitle":"Are you sure...","delete":"Delete","continue":"Continue","ok":"OK","back":"Back","errortitle":"An error occurred!","options":"Options","plaintoggle":"Plain text","htmltoggle":"HTML","previous":"Previous","next":"Next","select":"Select","browse":"Browse","choosefile":"Choose file...","choosefiles":"Choose files..."});
+rcmail.gui_container("loginfooter","login-footer");rcmail.gui_object('loginform', 'login-form');
+rcmail.gui_object('message', 'messagestack');
+&lt;/script&gt;
+
+&lt;script src="plugins/jqueryui/js/jquery-ui.min.js?s=1674504193"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body class="task-login action-none"&gt;
+	
+		&lt;div id="layout"&gt;
+	
+
+
+&lt;h1 class="voice"&gt;Roundcube Webmail Login&lt;/h1&gt;
+
+&lt;div id="layout-content" class="selected no-navbar" role="main"&gt;
+	&lt;img src="skins/elastic/images/logo.svg?s=1674504194" id="logo" alt="Logo"&gt;
+	&lt;form id="login-form" name="login-form" method="post" class="propform" action="/webmail/?_task=login"&gt;
+&lt;input type="hidden" name="_token" value="wnZ14AZrdEqQ7umc67X4uXRZJWY395b7"&gt;
+	&lt;input type="hidden" name="_task" value="login"&gt;&lt;input type="hidden" name="_action" value="login"&gt;&lt;input type="hidden" name="_timezone" id="rcmlogintz" value="_default_"&gt;&lt;input type="hidden" name="_url" id="rcmloginurl" value=""&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="title"&gt;&lt;label for="rcmloginuser"&gt;Username&lt;/label&gt;&lt;/td&gt;&lt;td class="input"&gt;&lt;input name="_user" id="rcmloginuser" required size="40" class="form-control" autocapitalize="off" value="" type="text"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="title"&gt;&lt;label for="rcmloginpwd"&gt;Password&lt;/label&gt;&lt;/td&gt;&lt;td class="input"&gt;&lt;input name="_pass" id="rcmloginpwd" required size="40" class="form-control" autocapitalize="off" type="password"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p class="formbuttons"&gt;&lt;button type="submit" id="rcmloginsubmit" class="button mainaction submit"&gt;Login&lt;/button&gt;&lt;/p&gt;
+		&lt;div id="login-footer" role="contentinfo"&gt;
+			Roundcube Webmail
+			
+			
+			
+		&lt;/div&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;noscript&gt;
+	&lt;p class="noscriptwarning"&gt;Warning: This webmail service requires Javascript! In order to use it please enable Javascript in your browser's settings.&lt;/p&gt;
+&lt;/noscript&gt;
+
+
+&lt;/div&gt;
+
+
+
+&lt;div id="messagestack"&gt;&lt;/div&gt;
+&lt;script&gt;
+$(function() {
+rcmail.init();
+});
+&lt;/script&gt;
+
+
+
+&lt;script src="skins/elastic/deps/bootstrap.bundle.min.js?s=1674504210"&gt;&lt;/script&gt;
+&lt;script src="skins/elastic/ui.min.js?s=1674504194"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</body>
+        <request>
+          <url>https://185.182.56.86/webmail/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET /webmail/ HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/webmail/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1075</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:54 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Expires" value="Mon, 13 Mar 2023 14:35:54 GMT"/>
+            <header name="Cache-Control" value="private, no-cache, no-store, must-revalidate, post-check=0, pre-check=0"/>
+            <header name="Pragma" value="no-cache"/>
+            <header name="X-Frame-Options" value="sameorigin"/>
+            <header name="Content-Language" value="en"/>
+            <header name="Set-Cookie" value="roundcube_sessid=fabcce8e03b04c9404d9155dc07d052b; path=/; secure; HttpOnly"/>
+            <header name="Last-Modified" value="Mon, 13 Mar 2023 14:35:54 GMT"/>
+            <header name="Vary" value="Accept-Encoding,User-Agent"/>
+            <header name="Content-Encoding" value="gzip"/>
+            <header name="X-Robots-Tag" value="noindex, nofollow"/>
+            <header name="Content-Length" value="2269"/>
+            <header name="Content-Type" value="text/html; charset=UTF-8"/>
+          </headers>
+          <body>&lt;!DOCTYPE html&gt;
+
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;Roundcube Webmail :: Welcome to Roundcube Webmail&lt;/title&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0"&gt;&lt;meta name="theme-color" content="#f4f4f4"&gt;&lt;meta name="msapplication-navbutton-color" content="#f4f4f4"&gt;
+	&lt;link rel="shortcut icon" href="skins/elastic/images/favicon.ico?s=1674504194"&gt;
+	&lt;link rel="stylesheet" href="skins/elastic/deps/bootstrap.min.css?s=1674504210"&gt;
+	
+		&lt;link rel="stylesheet" href="skins/elastic/styles/styles.min.css?s=1674504194"&gt;
+		
+	
+	
+		&lt;script&gt;
+		try {
+			if (document.cookie.indexOf('colorMode=dark') &gt; -1
+				|| (document.cookie.indexOf('colorMode=light') === -1 &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.className += ' dark-mode';
+			}
+		} catch (e) { }
+		&lt;/script&gt;
+	
+&lt;link rel="stylesheet" type="text/css" href="plugins/jqueryui/themes/elastic/jquery-ui.min.css?s=1674504193"&gt;&lt;script src="program/js/jquery.min.js?s=1674504197"&gt;&lt;/script&gt;&lt;script src="program/js/common.min.js?s=1674504194"&gt;&lt;/script&gt;&lt;script src="program/js/app.min.js?s=1674504194"&gt;&lt;/script&gt;&lt;script src="program/js/jstz.min.js?s=1674504197"&gt;&lt;/script&gt;&lt;script&gt;
+/*
+        @licstart  The following is the entire license notice for the 
+        JavaScript code in this page.
+
+        Copyright (C) The Roundcube Dev Team
+
+        The JavaScript code in this page is free software: you can redistribute
+        it and/or modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation, either version 3 of
+        the License, or (at your option) any later version.
+
+        The code is distributed WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU GPL for more details.
+
+        @licend  The above is the entire license notice
+        for the JavaScript code in this page.
+*/
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","standard_windows":false,"locale":"en_US","devel_mode":null,"rcversion":10601,"cookie_domain":"","cookie_path":"/","cookie_secure":true,"dark_mode_support":true,"skin":"elastic","blankpage":"skins/elastic/watermark.html","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":"/webmail/?_task=login","compose_extwin":false,"date_format":"yy-mm-dd","date_format_localized":"YYYY-MM-DD","request_token":"wnZ14AZrdEqQ7umc67X4uXRZJWY395b7"});
+rcmail.add_label({"loading":"Loading...","servererror":"Server Error!","connerror":"Connection Error (Failed to reach the server)!","requesttimedout":"Request timed out","refreshing":"Refreshing...","windowopenerror":"The popup window was blocked!","uploadingmany":"Uploading files...","uploading":"Uploading file...","close":"Close","save":"Save","cancel":"Cancel","alerttitle":"Attention","confirmationtitle":"Are you sure...","delete":"Delete","continue":"Continue","ok":"OK","back":"Back","errortitle":"An error occurred!","options":"Options","plaintoggle":"Plain text","htmltoggle":"HTML","previous":"Previous","next":"Next","select":"Select","browse":"Browse","choosefile":"Choose file...","choosefiles":"Choose files..."});
+rcmail.gui_container("loginfooter","login-footer");rcmail.gui_object('loginform', 'login-form');
+rcmail.gui_object('message', 'messagestack');
+&lt;/script&gt;
+
+&lt;script src="plugins/jqueryui/js/jquery-ui.min.js?s=1674504193"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body class="task-login action-none"&gt;
+	
+		&lt;div id="layout"&gt;
+	
+
+
+&lt;h1 class="voice"&gt;Roundcube Webmail Login&lt;/h1&gt;
+
+&lt;div id="layout-content" class="selected no-navbar" role="main"&gt;
+	&lt;img src="skins/elastic/images/logo.svg?s=1674504194" id="logo" alt="Logo"&gt;
+	&lt;form id="login-form" name="login-form" method="post" class="propform" action="/webmail/?_task=login"&gt;
+&lt;input type="hidden" name="_token" value="wnZ14AZrdEqQ7umc67X4uXRZJWY395b7"&gt;
+	&lt;input type="hidden" name="_task" value="login"&gt;&lt;input type="hidden" name="_action" value="login"&gt;&lt;input type="hidden" name="_timezone" id="rcmlogintz" value="_default_"&gt;&lt;input type="hidden" name="_url" id="rcmloginurl" value=""&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="title"&gt;&lt;label for="rcmloginuser"&gt;Username&lt;/label&gt;&lt;/td&gt;&lt;td class="input"&gt;&lt;input name="_user" id="rcmloginuser" required size="40" class="form-control" autocapitalize="off" value="" type="text"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="title"&gt;&lt;label for="rcmloginpwd"&gt;Password&lt;/label&gt;&lt;/td&gt;&lt;td class="input"&gt;&lt;input name="_pass" id="rcmloginpwd" required size="40" class="form-control" autocapitalize="off" type="password"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p class="formbuttons"&gt;&lt;button type="submit" id="rcmloginsubmit" class="button mainaction submit"&gt;Login&lt;/button&gt;&lt;/p&gt;
+		&lt;div id="login-footer" role="contentinfo"&gt;
+			Roundcube Webmail
+			
+			
+			
+		&lt;/div&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;noscript&gt;
+	&lt;p class="noscriptwarning"&gt;Warning: This webmail service requires Javascript! In order to use it please enable Javascript in your browser's settings.&lt;/p&gt;
+&lt;/noscript&gt;
+
+
+&lt;/div&gt;
+
+
+
+&lt;div id="messagestack"&gt;&lt;/div&gt;
+&lt;script&gt;
+$(function() {
+rcmail.init();
+});
+&lt;/script&gt;
+
+
+
+&lt;script src="skins/elastic/deps/bootstrap.bundle.min.js?s=1674504210"&gt;&lt;/script&gt;
+&lt;script src="skins/elastic/ui.min.js?s=1674504194"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:54 GMT&#xD;
+Server: Apache/2&#xD;
+Expires: Mon, 13 Mar 2023 14:35:54 GMT&#xD;
+Cache-Control: private, no-cache, no-store, must-revalidate, post-check=0, pre-check=0&#xD;
+Pragma: no-cache&#xD;
+X-Frame-Options: sameorigin&#xD;
+Content-Language: en&#xD;
+Set-Cookie: roundcube_sessid=fabcce8e03b04c9404d9155dc07d052b; path=/; secure; HttpOnly&#xD;
+Last-Modified: Mon, 13 Mar 2023 14:35:54 GMT&#xD;
+Vary: Accept-Encoding,User-Agent&#xD;
+Content-Encoding: gzip&#xD;
+X-Robots-Tag: noindex, nofollow&#xD;
+Content-Length: 2269&#xD;
+Content-Type: text/html; charset=UTF-8&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/webmail/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </page>
+      <referring_page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </referring_page>
+      <signature/>
+      <proof>HTTP/1.1 200 OK</proof>
+      <trusted>true</trusted>
+      <platform_type/>
+      <platform_name/>
+    </issue>
+    <issue>
+      <name>Missing 'Strict-Transport-Security' header</name>
+      <description>
+The HTTP protocol by itself is clear text, meaning that any data that is
+transmitted via HTTP can be captured and the contents viewed. To keep data
+private and prevent it from being intercepted, HTTP is often tunnelled through
+either Secure Sockets Layer (SSL) or Transport Layer Security (TLS).
+When either of these encryption standards are used, it is referred to as HTTPS.
+
+HTTP Strict Transport Security (HSTS) is an optional response header that can be
+configured on the server to instruct the browser to only communicate via HTTPS.
+This will be enforced by the browser even if the user requests a HTTP resource
+on the same server.
+
+Cyber-criminals will often attempt to compromise sensitive information passed
+from the client to the server using HTTP. This can be conducted via various
+Man-in-The-Middle (MiTM) attacks or through network packet captures.
+
+Arachni discovered that the affected application is using HTTPS however does not
+use the HSTS header.
+</description>
+      <remedy_guidance>
+Depending on the framework being used the implementation methods will vary,
+however it is advised that the `Strict-Transport-Security` header be configured
+on the server.
+
+One of the options for this header is `max-age`, which is a representation (in
+milliseconds) determining the time in which the client's browser will adhere to
+the header policy.
+
+Depending on the environment and the application this time period could be from
+as low as minutes to as long as days.
+</remedy_guidance>
+      <remedy_code/>
+      <severity>medium</severity>
+      <check>
+        <name>HTTP Strict Transport Security</name>
+        <description>Checks HTTPS pages for missing `Strict-Transport-Security` headers.</description>
+        <author>Tasos Laskos &lt;tasos.laskos@arachni-scanner.com&gt;</author>
+        <version>0.1.3</version>
+        <shortname>hsts</shortname>
+      </check>
+      <cwe>200</cwe>
+      <digest>1974211824</digest>
+      <references>
+        <reference title="OWASP" url="https://www.owasp.org/index.php/HTTP_Strict_Transport_Security"/>
+        <reference title="Wikipedia" url="http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security"/>
+      </references>
+      <vector>
+        <class>Arachni::Element::Server</class>
+        <type>server</type>
+        <url>https://185.182.56.86/</url>
+        <action>https://185.182.56.86/</action>
+      </vector>
+      <remarks/>
+      <page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </page>
+      <referring_page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </referring_page>
+      <signature/>
+      <proof>HTTP/1.1 200 OK</proof>
+      <trusted>true</trusted>
+      <platform_type/>
+      <platform_name/>
+    </issue>
+    <issue>
+      <name>Missing 'X-Frame-Options' header</name>
+      <description>
+Clickjacking (User Interface redress attack, UI redress attack, UI redressing)
+is a malicious technique of tricking a Web user into clicking on something different
+from what the user perceives they are clicking on, thus potentially revealing
+confidential information or taking control of their computer while clicking on
+seemingly innocuous web pages.
+
+The server didn't return an `X-Frame-Options` header which means that this website
+could be at risk of a clickjacking attack.
+
+The `X-Frame-Options` HTTP response header can be used to indicate whether or not
+a browser should be allowed to render a page inside a frame or iframe. Sites can
+use this to avoid clickjacking attacks, by ensuring that their content is not
+embedded into other sites.
+</description>
+      <remedy_guidance>
+Configure your web server to include an `X-Frame-Options` header.
+</remedy_guidance>
+      <remedy_code/>
+      <severity>low</severity>
+      <check>
+        <name>Missing X-Frame-Options header</name>
+        <description>Checks the host for a missing `X-Frame-Options` header.</description>
+        <author>Tasos Laskos &lt;tasos.laskos@arachni-scanner.com&gt;</author>
+        <version>0.1.3</version>
+        <shortname>x_frame_options</shortname>
+      </check>
+      <cwe>693</cwe>
+      <digest>758011383</digest>
+      <references>
+        <reference title="MDN" url="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options"/>
+        <reference title="RFC" url="http://tools.ietf.org/html/rfc7034"/>
+        <reference title="OWASP" url="https://www.owasp.org/index.php/Clickjacking"/>
+      </references>
+      <vector>
+        <class>Arachni::Element::Server</class>
+        <type>server</type>
+        <url>https://185.182.56.86/</url>
+        <action>https://185.182.56.86/</action>
+      </vector>
+      <remarks/>
+      <page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </page>
+      <referring_page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </referring_page>
+      <signature/>
+      <proof>HTTP/1.1 200 OK</proof>
+      <trusted>true</trusted>
+      <platform_type/>
+      <platform_name/>
+    </issue>
+    <issue>
+      <name>Allowed HTTP methods</name>
+      <description>
+There are a number of HTTP methods that can be used on a webserver (`OPTIONS`,
+`HEAD`, `GET`, `POST`, `PUT`, `DELETE` etc.).  Each of these methods perform a
+different function and each have an associated level of risk when their use is
+permitted on the webserver.
+
+A client can use the `OPTIONS` method within a request to query a server to
+determine which methods are allowed.
+
+Cyber-criminals will almost always perform this simple test as it will give a
+very quick indication of any high-risk methods being permitted by the server.
+
+Arachni discovered that several methods are supported by the server.
+</description>
+      <remedy_guidance>
+It is recommended that a whitelisting approach be taken to explicitly permit the
+HTTP methods required by the application and block all others.
+
+Typically the only HTTP methods required for most applications are `GET` and
+`POST`. All other methods perform actions that are rarely required or perform
+actions that are inherently risky.
+
+These risky methods (such as `PUT`, `DELETE`, etc) should be protected by strict
+limitations, such as ensuring that the channel is secure (SSL/TLS enabled) and
+only authorised and trusted clients are permitted to use them.
+</remedy_guidance>
+      <remedy_code/>
+      <severity>informational</severity>
+      <check>
+        <name>Allowed methods</name>
+        <description>Checks for supported HTTP methods.</description>
+        <author>Tasos "Zapotek" Laskos &lt;tasos.laskos@arachni-scanner.com&gt;</author>
+        <version>0.2</version>
+        <shortname>allowed_methods</shortname>
+      </check>
+      <digest>1889636723</digest>
+      <references>
+        <reference title="Apache.org" url="http://httpd.apache.org/docs/2.2/mod/core.html#limitexcept"/>
+      </references>
+      <vector>
+        <class>Arachni::Element::Server</class>
+        <type>server</type>
+        <url>https://185.182.56.86/</url>
+        <action>https://185.182.56.86/</action>
+      </vector>
+      <remarks/>
+      <page>
+        <body/>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>options</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>OPTIONS / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.0416</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:56 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Allow" value="GET,POST,OPTIONS,HEAD"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Length" value="0"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body/>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:56 GMT&#xD;
+Server: Apache/2&#xD;
+Allow: GET,POST,OPTIONS,HEAD&#xD;
+Vary: User-Agent&#xD;
+Content-Length: 0&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </page>
+      <referring_page>
+        <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+        <request>
+          <url>https://185.182.56.86/</url>
+          <method>get</method>
+          <parameters/>
+          <headers>
+            <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+            <header name="User-Agent" value="Mozilla/5.0 (Gecko) Arachni/v1.6.1.1"/>
+            <header name="Accept-Language" value="en-US,en;q=0.8,he;q=0.6"/>
+            <header name="X-Arachni-Scan-Seed" value="3936546e9a563de507f9e34ac09efbbd"/>
+          </headers>
+          <body/>
+          <raw>GET / HTTP/1.1&#xD;
+Host: 185.182.56.86&#xD;
+Accept-Encoding: gzip, deflate&#xD;
+User-Agent: Mozilla/5.0 (Gecko) Arachni/v1.6.1.1&#xD;
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;
+Accept-Language: en-US,en;q=0.8,he;q=0.6&#xD;
+X-Arachni-Scan-Seed: 3936546e9a563de507f9e34ac09efbbd&#xD;
+&#xD;
+</raw>
+        </request>
+        <response>
+          <url>https://185.182.56.86/</url>
+          <code>200</code>
+          <ip_address>185.182.56.86</ip_address>
+          <time>0.1871</time>
+          <return_code>ok</return_code>
+          <return_message>No error</return_message>
+          <headers>
+            <header name="Date" value="Mon, 13 Mar 2023 14:35:53 GMT"/>
+            <header name="Server" value="Apache/2"/>
+            <header name="Upgrade" value="h2,h2c"/>
+            <header name="Connection" value="Upgrade"/>
+            <header name="Last-Modified" value="Tue, 16 Aug 2022 09:35:49 GMT"/>
+            <header name="Etag" value="&quot;2c-5e658794654e0&quot;"/>
+            <header name="Accept-Ranges" value="bytes"/>
+            <header name="Content-Length" value="44"/>
+            <header name="Vary" value="User-Agent"/>
+            <header name="Content-Type" value="text/html"/>
+          </headers>
+          <body>&lt;html&gt;Apache is functioning normally&lt;/html&gt;
+</body>
+          <raw_headers>HTTP/1.1 200 OK&#xD;
+Date: Mon, 13 Mar 2023 14:35:53 GMT&#xD;
+Server: Apache/2&#xD;
+Upgrade: h2,h2c&#xD;
+Connection: Upgrade&#xD;
+Last-Modified: Tue, 16 Aug 2022 09:35:49 GMT&#xD;
+ETag: "2c-5e658794654e0"&#xD;
+Accept-Ranges: bytes&#xD;
+Content-Length: 44&#xD;
+Vary: User-Agent&#xD;
+Content-Type: text/html&#xD;
+&#xD;
+</raw_headers>
+        </response>
+        <dom>
+          <url>https://185.182.56.86/</url>
+          <transitions/>
+          <data_flow_sinks/>
+          <execution_flow_sinks/>
+        </dom>
+      </referring_page>
+      <signature/>
+      <proof>GET,POST,OPTIONS,HEAD</proof>
+      <trusted>true</trusted>
+      <platform_type/>
+      <platform_name/>
+    </issue>
+  </issues>
+  <plugins>
+    <healthmap>
+      <name>Health map</name>
+      <description>Generates a simple list of safe/unsafe URLs.</description>
+      <results>
+        <map>
+          <with_issues>https://185.182.56.86/</with_issues>
+          <with_issues>https://185.182.56.86/webmail/</with_issues>
+        </map>
+        <total>2</total>
+        <with_issues>2</with_issues>
+        <without_issues>0</without_issues>
+        <issue_percentage>100</issue_percentage>
+      </results>
+    </healthmap>
+  </plugins>
+</report>
