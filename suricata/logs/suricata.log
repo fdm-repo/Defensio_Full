@@ -1,0 +1,23 @@
+11/2/2023 -- 11:55:09 - <Notice> - This is Suricata version 6.0.10 RELEASE running in SYSTEM mode
+11/2/2023 -- 11:55:09 - <Info> - CPUs/cores online: 12
+11/2/2023 -- 11:55:09 - <Info> - Found an MTU of 1500 for 'wlx54af97d75c34'
+11/2/2023 -- 11:55:09 - <Info> - Found an MTU of 1500 for 'wlx54af97d75c34'
+11/2/2023 -- 11:55:09 - <Info> - Shortening device name to: wlx5..5c34
+11/2/2023 -- 11:55:09 - <Info> - dropped the caps for main thread
+11/2/2023 -- 11:55:09 - <Info> - fast output device (regular) initialized: fast.log
+11/2/2023 -- 11:55:09 - <Info> - eve-log output device (regular) initialized: eve.json
+11/2/2023 -- 11:55:09 - <Info> - stats output device (regular) initialized: stats.log
+11/2/2023 -- 11:55:09 - <Info> - Running in live mode, activating unix socket
+11/2/2023 -- 11:55:14 - <Info> - 1 rule files processed. 33183 rules successfully loaded, 0 rules failed
+11/2/2023 -- 11:55:14 - <Info> - Threshold config parsed: 0 rule(s) found
+11/2/2023 -- 11:55:14 - <Info> - 33186 signatures processed. 1335 are IP-only rules, 5185 are inspecting packet payload, 26463 inspect application layer, 108 are decoder event only
+11/2/2023 -- 11:55:22 - <Info> - Going to use 12 thread(s)
+11/2/2023 -- 11:55:22 - <Info> - Running in live mode, activating unix socket
+11/2/2023 -- 11:55:22 - <Info> - Using unix socket file '/var/run/suricata/suricata-command.socket'
+11/2/2023 -- 11:55:22 - <Notice> - all 12 packet processing threads, 4 management threads initialized, engine started.
+11/2/2023 -- 11:55:23 - <Info> - All AFP capture threads are running.
+11/2/2023 -- 23:48:40 - <Notice> - Signal Received.  Stopping engine.
+11/2/2023 -- 23:48:40 - <Info> - time elapsed 42798.148s
+11/2/2023 -- 23:48:42 - <Info> - Alerts: 244
+11/2/2023 -- 23:48:42 - <Info> - cleaning up signature grouping structure... complete
+11/2/2023 -- 23:48:42 - <Notice> - Stats for 'wlx54af97d75c34':  pkts: 882843, drop: 0 (0.00%), invalid chksum: 0
