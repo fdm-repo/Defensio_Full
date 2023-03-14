@@ -20,25 +20,11 @@ except:
 
 ip_exclude_ids = data['ip_no_suricata']
 
-connessione_banned = DB_connect.database_connect()
-conn_banned = connessione_banned.database_connection()
 
-cur_ban = conn_banned.cursor()
-sql_select = """SELECT signature_banned FROM suricata_banned ; """
-cur_ban.execute(sql_select)
-result_banned = cur_ban.fetchall()
-
-cur_ban.close()
-conn_banned.close()
-
-# Inseriamo i risultati in un array
-
-banned_signatures = []
-for row in result_banned:
-    banned_signatures.append(row[0])
 
 
 while True:
+
 
 
 
@@ -55,6 +41,25 @@ while True:
 
     # Elenca i nomi dei file in ordine di creazione
     for file in sorted_files[:-1]:
+
+        connessione_banned = DB_connect.database_connect()
+        conn_banned = connessione_banned.database_connection()
+
+        cur_ban = conn_banned.cursor()
+        sql_select = """SELECT signature_banned FROM suricata_banned ; """
+        cur_ban.execute(sql_select)
+        result_banned = cur_ban.fetchall()
+
+        cur_ban.close()
+        conn_banned.close()
+
+        # Inseriamo i risultati in un array
+
+        banned_signatures = []
+        for row in result_banned:
+            banned_signatures.append(row[0])
+
+
 
         log = crealog.log_event()
         log.crealog(idprocess,
@@ -123,7 +128,7 @@ while True:
                             print('___________________________________________________________________');
                             print(' Record not inserted as it is a duplicate of the previous record.');
                             print('___________________________________________________________________');
-                            time.sleep(0.2)
+                            time.sleep(0.1)
                             os.system('clear')
                             # ignora il record corrente se i valori sono uguali ai precedenti
                             continue
@@ -136,7 +141,8 @@ while True:
                             print('___________________________________________________________________');
                             print('Record not inserted as host excluded by the administrator')
                             print('___________________________________________________________________');
-
+                            time.sleep(0.2)
+                            os.system('clear')
                         else:
                             # Database connection
                             try:
