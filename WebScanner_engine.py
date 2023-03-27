@@ -100,7 +100,7 @@ while True:
         conn = connessione.database_connection()
         arac = conn.cursor()
         arac.execute(
-            "SELECT Port.id_job, Port.ip,port_n FROM `Port` INNER JOIN job ON job.id_job=Port.id_job WHERE (Port.name='https' OR Port.port_n = '443') AND job.arachni='on' AND job.eseguito_arachni='off' AND job.net_discovery='on';")
+            "SELECT Port.id_job, Port.ip,port_n FROM `Port` INNER JOIN job ON job.id_job=Port.id_job WHERE (Port.name='https' OR Port.port_n = '443')AND Port.state='open' AND job.arachni='on' AND job.eseguito_arachni='off' AND job.net_discovery='on';")
         if arac.rowcount != 0:
             result = arac.fetchone()
             print(result)
