@@ -15,6 +15,8 @@ import crealog
 
 idprocess = "Defensio_engine"
 
+IANA_ports = '7,9,13,17,19,20,21,22,23,25,26,37,49,53,67,68,69,70,79,80,88,102,110,111,113,119,123,135,137,138,139,143,161,162,179,194,389,443,445,464,465,500,514,515,520,523,548,554,587,631,636,771,783,808,873,902,993,995,1080,1099,1241,1352,1433,1434,1521,1701,1723,1900,2000,2001,2049,2121,2222,2375,2376,3389,3690,4000,4001,4002,4100,4200,4444,4500,4662,5060,5432,5555,5631,5666,5800,5900,6000,6001,6379,6646,7070,8000,8008,8080,8443,8888,9418,10000,10050,11211,15672,27017,27018,27019,49152,49153,49154,49155,49156,49157'
+
 
 def whois_public_ip(id_j):
     id_job = id_j
@@ -124,7 +126,7 @@ while True:
 
     cur = conn.cursor()
 
-    cur.execute('SELECT id_job,id_asset,ip,netmask, single_port, low_port, high_port FROM job  WHERE ((abilitato="on" AND openvas = "off" AND net_discovery="off" ) OR (abilitato="on" AND openvas = "on" AND eseguito_openvas = "on" AND net_discovery="off" )) AND id_asset = %s; ', id_asset)
+    cur.execute('SELECT id_job,id_asset,ip,netmask, single_port, low_port, high_port, IANA_port FROM job  WHERE ((abilitato="on" AND openvas = "off" AND net_discovery="off" ) OR (abilitato="on" AND openvas = "on" AND eseguito_openvas = "on" AND net_discovery="off" )) AND id_asset = %s; ', id_asset)
     if cur.rowcount != 0:
         result = cur.fetchone()
         print(
@@ -158,10 +160,14 @@ while True:
         else:
             port_target = str(low_port) + "-" + str(high_port)
 
+        IANA_p= result[7]
+        if IANA_p == 'on':
+            port_target = IANA_ports
+
         print("Scansione attiva sulle porte: " + port_target)
 
-        argument = "-O -sV -p" + port_target
-
+        argument = "-v -O -sV -p" + port_target +" -sS --host-timeout 5m --max-retries 1"
+        print("Argomento della scansione: ")
         print(argument)
         # genera la stringa di inizio del job
         start_job = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
